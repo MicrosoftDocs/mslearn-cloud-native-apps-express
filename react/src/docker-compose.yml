@@ -1,0 +1,15 @@
+version: "3.9"
+
+services:
+  api:
+    image: cna-express # run docker build . -t cna-express in the /src folder of the repo https://github.com/MicrosoftDocs/mslearn-cloud-native-apps-express
+    ports:
+      - "4000:4000"
+  web:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - SOCKET_SERVER_URL=http://localhost:4000
+    depends_on:
+      - api
