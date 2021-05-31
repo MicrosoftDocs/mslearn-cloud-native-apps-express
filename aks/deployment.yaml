@@ -1,0 +1,19 @@
+# deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cna-express
+spec:
+  selector: # Define the wrapping strategy
+    matchLabels: # Match all pods with the defined labels
+      app: cna-express # Labels follow the `name: value` template
+  template: # This is the template of the pod inside the deployment
+    metadata:
+      labels:
+        app: cna-express
+    spec:
+      containers:
+        - image: <AcrLoginServer>/expressimage # Add your ACR login server from step 3 here
+          name: expressimage
+          ports:
+            - containerPort: 80

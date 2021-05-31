@@ -1,0 +1,15 @@
+    #service.yaml
+    apiVersion: v1
+    kind: Service
+    metadata:
+      name: cna-express
+    spec:
+      type: ClusterIP
+  #    kubectl apply -f ./service.yaml
+      selector:
+        app: cna-express
+      ports:
+        - port: 80 # SERVICE exposed port
+          name: http # SERVICE port name
+          protocol: TCP # The protocol the SERVICE will listen to
+          targetPort: 4000
