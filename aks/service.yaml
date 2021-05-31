@@ -5,7 +5,6 @@
       name: cna-express
     spec:
       type: ClusterIP
-  #    kubectl apply -f ./service.yaml
       selector:
         app: cna-express
       ports:
