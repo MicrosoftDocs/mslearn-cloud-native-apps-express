@@ -13,7 +13,7 @@ spec:
         app: cna-express
     spec:
       containers:
-        - image: cnasocket.azurecr.io/expressimage
+        - image: <AcrLoginServer>/expressimage # Add your ACR login server from step 3 here
           name: expressimage
           ports:
             - containerPort: 80

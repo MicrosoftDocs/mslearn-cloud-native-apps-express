@@ -3,7 +3,7 @@ import Head from "next/head";
 import { useEventStream } from "../hooks";
 
 export default function Home({ socketServerUrl }) {
- const { messages } = useEventStream(socketServerUrl);
+  const { messages } = useEventStream(socketServerUrl);
   return (
     <div>
       <Head>
@@ -18,7 +18,5 @@ export default function Home({ socketServerUrl }) {
   );
 }
 export async function getServerSideProps() {
-//   return { props: { socketServerUrl: ('localhost:4000', {path: '/'})}};
- 
- return { props: { socketServerUrl: ('http://cna-express.62623904ee0e4493aab1.eastus.aksapp.io:4000' , {path: 'express/socket.io'})} };
+  return { props: { socketServerUrl: process.env.SOCKET_SERVER_URL } };
 }
