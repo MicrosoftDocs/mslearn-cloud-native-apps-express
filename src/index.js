@@ -32,23 +32,63 @@ io.on("connection", (socket) => {
     isConnected = false;
   });
 
-  // Generate new messages until client is disconnected
-  let messageCount = 0;
-  const timoutBase = 5000;
-  let interval = setInterval(() => {
-    if (isConnected) {
-      const event = {
-        time: new Date().toISOString(),
-        message: "Message #" + messageCount,
-      };
-      socket.emit(NEW_EVENT_MESSAGE_ID, event);
-      messageCount++;
-    } else {
-      clearInterval(interval);
-    }
-  }, timoutBase - (Math.floor(Math.random() * 2500) + 1));
+  generateMessageRecursive(
+    socket,
+    isConnected,
+    0,
+    randomIntFromInterval(0, 5) * 1000,
+    undefined
+  );
 });
 
 server.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
 });
+
+const EVENT_LEVELS = ["high", "medium", "low"];
+const EVENT_NAMES = {
+  high: ["Failing Connection", "Low Power", "Low Stock"],
+  medium: ["Empty", "Item removed", "Manual Maintenance Required"],
+  low: ["Half full", "Recharged", "High power consumption"],
+};
+function generateMessageRecursive(
+  socket,
+  isConnected,
+  messageCount,
+  timeout,
+  lastInterval
+) {
+  if (isConnected) {
+    const msBeforeNextMessage = randomIntFromInterval(3, 5) * 1000;
+    const levelIndex = randomIntFromInterval(0, 2);
+    const eventIndex = randomIntFromInterval(0, 2);
+    const fridgeNumber = randomIntFromInterval(0, 99);
+    const event = {
+      time: new Date().toISOString(),
+      message: `Fridge ${fridgeNumber} - ${
+        EVENT_NAMES[EVENT_LEVELS[levelIndex]][eventIndex]
+      }`,
+      level: EVENT_LEVELS[levelIndex],
+    };
+    socket.emit(NEW_EVENT_MESSAGE_ID, event);
+    messageCount++;
+    let newTimeout = setTimeout(() => {
+      generateMessageRecursive(
+        socket,
+        isConnected,
+        messageCount,
+        msBeforeNextMessage,
+        newTimeout
+      );
+    }, timeout);
+  } else {
+    if (lastInterval) {
+      clearInterval(lastInterval);
+    }
+    return undefined;
+  }
+}
+
+function randomIntFromInterval(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
