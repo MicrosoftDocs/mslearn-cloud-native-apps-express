@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "export NODE_OPTIONS=--openssl-legacy-provider; next build",
-    "start": "next start -p process.env.PORT"
+    "start": "next start -p ${PORT}"
   },
   "dependencies": {
     "classnames": "2.2.6",
