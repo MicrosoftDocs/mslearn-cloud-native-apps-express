@@ -1,0 +1,96 @@
+html {
+  padding: 0;
+}
+
+body {
+  color: white;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  background: url(/background.jpg) no-repeat center center fixed;
+  background-size: cover;
+  padding: 40px 0 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+ul.unstyled {
+  list-style: none;
+  padding: 0;
+}
+
+.Messages {
+  display: flex;
+}
+
+.Messages .message {
+  flex: 1 0 25%;
+  padding: 0 35px 20px 0;
+  max-width: 25%;
+}
+
+.Messages .message:nth-child(4n) {
+  padding-right: 0;
+}
+
+.Messages .message--inner {
+  display: block;
+  border: 2px solid transparent;
+  padding: 10px 20px;
+  border-radius: 15px;
+  width: 100%;
+}
+
+.Messages .message.level-low .message--inner {
+  border-color: #81c145;
+}
+
+.Messages .message.level-medium .message--inner {
+  border-color: #f6a742;
+}
+
+.Messages .message.level-high .message--inner {
+  border-color: #ed1c24;
+}
+
+.Priority ul li.level-low {
+  background-color: #81c145;
+}
+
+.Priority ul li.level-low {
+  background-color: #81c145;
+}
+
+.Priority ul li.level-medium {
+  background-color: #f6a742;
+}
+
+.Priority ul li.level-high {
+  background-color: #ed1c24;
+}
+
+.Priority ul {
+  margin-left: 30px;
+}
+
+.Priority ul li {
+  margin: 0 10px;
+  padding: 2px 50px;
+  min-width: 200px;
+  text-align: center;
+}
+
+.Priority--key {
+  max-width: 500px;
+}
+
+.Priority h4,
+.LastUpdateDate h4 {
+  font-weight: 200;
+}
