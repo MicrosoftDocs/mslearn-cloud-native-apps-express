@@ -1,5 +1,5 @@
 #ingress.yaml
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: cna-express
@@ -10,7 +10,10 @@ spec:
     - host: cna-express.<exampleURL.eastus.aksapp.io>
       http:
         paths:
-          - backend: # How the ingress will handle the requests
-              serviceName: cna-express # Which service the request will be forwarded to
-              servicePort: http # Which port in that service
-            path: / # Which path is this rule referring to
+          - path: /
+            pathType: Prefix
+            backend: # How the ingress will handle the requests
+              service: 
+                name: cna-express # Which service the request will be forwarded to
+                port:
+                  number: 80 # Which port in that service
